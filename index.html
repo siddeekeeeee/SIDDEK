@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <head>
+        <title>Muslim Thai</title>
+        <link rel="icon" href="1-แอพมุสลิมไทย.jpg" type="image/jpg">
+    </head>
+
+    <style>
+        /* Body and background styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+            background-size: 300% 300%;
+            animation: gradientBG 10s infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Clock styles */
+        #clock {
+            font-size: 20rem;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            animation: colorChange 5s infinite;
+        }
+
+        @keyframes colorChange {
+            0% {
+                color: #ff9a9e;
+            }
+
+            25% {
+                color: #fad0c4;
+            }
+
+            50% {
+                color: #fbc2eb;
+            }
+
+            75% {
+                color: #ff9a9e;
+            }
+
+            100% {
+                color: #fad0c4;
+            }
+        }
+
+        /* Menu styles */
+        #menu {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #menu ul li {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #menu ul li:last-child {
+            border-bottom: none;
+        }
+
+        #menu ul li:hover {
+            background: #fbc2eb;
+            color: white;
+        }
+
+        /* Table and grid styles */
+        .table-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(34, 6, 6, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            margin: 0;
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .clock {
+                font-size: 3rem;
+            }
+
+            .table {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<!-- Menu -->
+<div id="menu">
+    <ul>
+        <li onclick="goToPage('home')">HOME</li>
+        <li onclick="goToPage('about')">ABOUT</li>
+        <li onclick="goToPage('contact')">CONTACT</li>
+    </ul>
+</div>
+
+<!-- Clock -->
+<div id="clock">00:00:00</div>
+
+<!-- Table with time display -->
+<div class="table-container">
+    <h2>กรุงเทพมหานคร</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>วันที่</th>
+                <th>ซุบฮิ</th>
+                <th>ดุฮริ</th>
+                <th>อัสรี่</th>
+                <th>มัฆริบ</th>
+                <th>อีชา</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>วันที่ 1 มกราคม 2568</td>
+                <td class="time-cell">5:22</td>
+                <td class="time-cell">12:24</td>
+                <td class="time-cell">15:37</td>
+                <td class="time-cell">18:02</td>
+                <td class="time-cell">19:18</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Prayer Time iframe -->
+<iframe width="300px" height="200px" loading="lazy"
+    src="https://prayertimes.muslimthaipost.com/solaat.php?TAcHwyO2RBVVRPO21BVVRPO3lBVVRPOzEzMzsxOTY7IzAwMDBGRjsjMDAwMEZGOyNGRkZGRkY7I0ZGRkZGRjsjRkZGRkZGOyNGRkZGRkY7I0ZGRkZGRjsjMDAwMDAwOyMwMDAwMDA7IzAwMDAwMDs7Ozs7Ozs7Ozs7Ozs7Ozs7MjswOzA7cGR8UFM7MTs7MTsxLjI7YzYz&sm"
+    frameborder="0" scrolling="no"></iframe>
+
+<script>
+    // อัปเดตเวลาบนหน้าจอ
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // การนำทางหน้าเมนู
+    function goToPage(page) {
+        alert(`Navigating to ${page.toUpperCase()} page!`);
+    }
+
+    // อัปเดตเวลาในตาราง
+    function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const formattedTime = `${hours}:${minutes}`;
+
+        // อัปเดตทุก cell ที่มี class "time-cell"
+        const timeCells = document.querySelectorAll('.time-cell');
+        timeCells.forEach((cell, index) => {
+            const offsetMinutes = index * 10; // เพิ่มเวลาต่างกัน 10 นาทีต่อ cell
+            const updatedTime = new Date(now.getTime() + offsetMinutes * 60000);
+            const updatedHours = String(updatedTime.getHours()).padStart(2, '0');
+            const updatedMinutes = String(updatedTime.getMinutes()).padStart(2, '0');
+            cell.textContent = `${updatedHours}:${updatedMinutes}`;
+        });
+    }
+
+    // เริ่มต้นฟังก์ชันต่างๆ
+    setInterval(updateClock, 1000);
+    updateClock();
+    setInterval(updateTime, 86400000); // 24 ชั่วโมง
+</script>
+</body>
+
+
+</html>
